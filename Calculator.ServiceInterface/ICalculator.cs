@@ -5,11 +5,11 @@ namespace Calculator.ServiceInterface
 {
     public interface ICalculator
     {
-        decimal Add(decimal number1, decimal number2);
-        decimal Subtract(decimal number1, decimal number2);
-        decimal Multiply(decimal number1, decimal number2);
-        decimal Divide(decimal number1, decimal number2);
-        List<decimal> SplitEq(decimal number1, decimal number2);
+        decimal Add(List<decimal> numbers);
+        decimal Subtract(List<decimal> numbers);
+        decimal Multiply(List<decimal> numbers);
+        decimal Divide(List<decimal> numbers);
+        List<decimal> SplitEq(List<decimal> numbers);
         decimal SplitNum(List<decimal> numbers);
     }
 }

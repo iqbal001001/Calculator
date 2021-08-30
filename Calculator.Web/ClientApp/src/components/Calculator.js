@@ -5,7 +5,7 @@ export class Calculator extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { number1: "", number2:"", operation: null, result: "" };
+    this.state = { numbers: "", operation: null, result: "" };
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 
@@ -24,31 +24,31 @@ export class Calculator extends Component {
 		let data = null;
 
 		if (op == "Add") {
-			api = "add?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "add?numbers=" + this.state.numbers;
 			data = await this.getResult(api);
 		}
 
 		if (op == "Subtract") {
-			api = "subtract?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "subtract?numbers=" + this.state.numbers;
 			data = await this.getResult(api);
 		} 
 
 		if (op == "Multiply") {
-			api = "multiply?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "multiply?numbers=" + this.state.numbers;
 			data = await this.getResult(api);
 		}
 
 		if (op == "Divide") {
-			api = "divide?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "divide?numbers=" + this.state.numbers;
 			data = await this.getResult(api);
 		}
 		if (op == "SplitEq") {
-			api = "splitEq?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "splitEq?numbers=" + this.state.numbers;
 			let r = await this.getResult(api) 
 			data = r.join();
 		}
 		if (op == "SplitNum") {
-			api = "splitNum?number1=" + this.state.number1 + "&number2=" + this.state.number2;
+			api = "splitNum?numbers=" + this.state.numbers;
 			data = await this.getResult(api);
 		}
 		
@@ -75,21 +75,14 @@ export class Calculator extends Component {
         <h1>Calculator</h1>
 			<form noValidate>
 				<div>
-					<label htmlFor="number1">Number 1</label>
-					<input type="text" className="form-control" id="number1" placeholder="number 1" required
-						value={this.state.number1}
-						onChange={(e) => { this.setState({ number1: e.target.value }); }}
+					<label htmlFor="numbers">Number Range</label>
+					<input type="text" className="form-control" id="numbers" placeholder="numbers" required
+						value={this.state.numbers}
+						onChange={(e) => { this.setState({ numbers: e.target.value }); }}
 					/>
 				</div>
 				<div >
-					<label htmlFor="number1">Number 2</label>
-					<input type="text" className="form-control" id="numbeer2" placeholder="number 2" required
-						value={this.state.lastName}
-						onChange={(e) => { this.setState({ number2: e.target.value }); }}
-					/>
-				</div>
-				<div >
-					<label>Result</label> <span>{this.state.result}</span>
+					<label>Result: </label> <span>{this.state.result}</span>
 				</div>
 				
 				<div className="form-group row">
@@ -97,25 +90,65 @@ export class Calculator extends Component {
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("Add") }} type="submit">Add</button>
 					</div>
+					<div>
+						<span>Takes two or more parameters and returns the sum of all the numbers</span>
+						<br></br>
+						<span>Example: 5, 2, 3, 5, 3 = 18</span>
+					</div>
+				</div>
+					<div className="form-group row">
 					<div className="col-3">
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("Subtract") }} type="submit">Subtract</button>
 					</div>
+					<div>
+						<span>Takes two or more parameters and returns the subtraction of the numbers</span>
+						<br></br>
+						<span>Example: 25, 2, 3, 5, 3 = 12</span>
+					</div>
+				</div>
+				<div className="form-group row">
 					<div className="col-3">
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("Multiply") }} type="submit">Multiply</button>
 					</div>
+					<div>
+						<span>Takes two or more parameters and returns the multiplication</span>
+						<br></br>
+						<span>Example:  2, 4, 3, 5 = 120</span>
+					</div>
+				</div>
+				<div className="form-group row">
 					<div className="col-3">
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("Divide") }} type="submit">Divide</button>
 					</div>
+					<div>
+						<span>Takes two parameters and returns the division</span>
+						<br></br>
+						<span>Example: 16, 4 = 4</span>
+					</div>
+				</div>
+				<div className="form-group row">
 					<div className="col-3">
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("SplitEq") }} type="submit">SplitEq</button>
 					</div>
+					<div>
+						<span>Takes two parameters and return the split of param1, param2 times</span>
+						<br></br>
+						<span>Example: 120, 4 = {30, 30, 30, 30}</span>
+					</div>
+				</div>
+				<div className="form-group row">
 					<div className="col-3">
 						<button className="btn btn-primary"
 							onClick={(e) => { this.onSubmit(e)("SplitNum") }} type="submit">SplitNum</button>
+					</div>
+					<div>
+						<span>Takes two or more parameters and returns the remainder</span>
+						<br></br>
+						<span>Example: 140, 45, 35, 20 = 40</span>
 					</div>
 
 				</div>

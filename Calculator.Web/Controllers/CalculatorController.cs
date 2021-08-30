@@ -5,7 +5,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using Calculator.Web.Extension;
 
 namespace Calculator.Web.Controllers
 {
@@ -25,20 +25,12 @@ namespace Calculator.Web.Controllers
         }
 
         [Route("add")]
-        public ActionResult<decimal> Add(string number1, string number2)
+        public ActionResult<decimal> Add(string numbers)
         {
-            if (!decimal.TryParse(number1, out decimal num1))
-            {
-                return BadRequest("number 1 is not a valid integer");
-            }
-
-            if (!decimal.TryParse(number2, out decimal num2))
-            {
-                return BadRequest("number 2 is not a valid integer");
-            }
             try
             {
-                return Ok(_calculator.Add(num1, num2));
+                var nums = numbers.GetList<decimal>();
+                return Ok(_calculator.Add(nums));
             }
             catch (Exception ex)
             {
@@ -48,20 +40,12 @@ namespace Calculator.Web.Controllers
         }
 
         [HttpGet("subtract")]
-        public ActionResult<decimal> Subtract(string number1, string number2)
+        public ActionResult<decimal> Subtract(string numbers)
         {
-            if (!int.TryParse(number1, out int num1))
-            {
-                return BadRequest("number 1 is not a valid integer");
-            }
-
-            if (!int.TryParse(number2, out int num2))
-            {
-                return BadRequest("number 2 is not a valid integer");
-            }
             try
             {
-                return Ok(_calculator.Subtract(num1, num2));
+                var nums = numbers.GetList<decimal>();
+                return Ok(_calculator.Subtract(nums));
             }
             catch (Exception ex)
             {
@@ -71,20 +55,12 @@ namespace Calculator.Web.Controllers
         }
 
         [HttpGet("multiply")]
-        public ActionResult<decimal> Multiply(string number1, string number2)
+        public ActionResult<decimal> Multiply(string numbers)
         {
-            if (!int.TryParse(number1, out int num1))
-            {
-                return BadRequest("number 1 is not a valid integer");
-            }
-
-            if (!int.TryParse(number2, out int num2))
-            {
-                return BadRequest("number 2 is not a valid integer");
-            }
             try
             {
-                return Ok(_calculator.Multiply(num1, num2));
+                var nums = numbers.GetList<decimal>();
+                return Ok(_calculator.Multiply(nums));
             }
             catch (Exception ex)
             {
@@ -94,20 +70,12 @@ namespace Calculator.Web.Controllers
         }
 
         [HttpGet("divide")]
-        public ActionResult<decimal> Divide(string number1, string number2)
+        public ActionResult<decimal> Divide(string numbers)
         {
-            if (!int.TryParse(number1, out int num1))
-            {
-                return BadRequest("number 1 is not a valid integer");
-            }
-
-            if (!int.TryParse(number2, out int num2))
-            {
-                return BadRequest("number 2 is not a valid integer");
-            }
             try
             {
-                return Ok(_calculator.Divide(num1, num2));
+                var nums = numbers.GetList<decimal>();
+                return Ok(_calculator.Divide(nums));
             }
             catch (Exception ex)
             {
@@ -117,20 +85,12 @@ namespace Calculator.Web.Controllers
         }
 
         [HttpGet("splitEq")]
-        public ActionResult<List<decimal>> SplitEq(string number1, string number2)
+        public ActionResult<List<decimal>> SplitEq(string numbers)
         {
-            if (!int.TryParse(number1, out int num1))
-            {
-                return BadRequest("number 1 is not a valid integer");
-            }
-
-            if (!int.TryParse(number2, out int num2))
-            {
-                return BadRequest("number 2 is not a valid integer");
-            }
             try
             {
-                return Ok(_calculator.SplitEq(num1, num2));
+                var nums = numbers.GetList<decimal>();
+                return Ok(_calculator.SplitEq(nums));
             }
             catch (Exception ex)
             {
@@ -140,11 +100,11 @@ namespace Calculator.Web.Controllers
         }
 
         [HttpGet("splitNum")]
-        public ActionResult<decimal> SplitNum(string number1)
+        public ActionResult<decimal> SplitNum(string numbers)
         {
             try
             {
-                var nums = number1.Split(",").Select(decimal.Parse).ToList();
+                var nums = numbers.GetList<decimal>();
                 return Ok(_calculator.SplitNum(nums));
             }
             catch (Exception ex) 
